@@ -1,14 +1,8 @@
-import { useState, useEffect } from "react";
-import type { Schema } from "../../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
-import { Badge, BreadcrumbGroup, ContentLayout, Header, SpaceBetween, TextContent} from "@cloudscape-design/components";
-import { REGION_OPTIONS } from "../hooks/REGION_OPTIONS";
+import { useEffect } from "react";
+import { BreadcrumbGroup, ContentLayout, Header, SpaceBetween, TextContent} from "@cloudscape-design/components";
 
 import { useHelpPanel } from '../contexts/HelpPanelContext';
-import { generateCSVOutput } from "../hooks/generateCSVOutput";
-import { CodeView } from "@cloudscape-design/code-view";
 
-const client = generateClient<Schema>();
 
 function GuidePage () {
   const { setHelpPanelContent, setIsHelpPanelOpen } = useHelpPanel();
