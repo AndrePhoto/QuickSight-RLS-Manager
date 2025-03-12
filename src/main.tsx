@@ -5,9 +5,8 @@ import outputs from "../amplify_outputs.json";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Navigation} from "./components/Layout/Navigation.tsx";
 
-// import '@aws-amplify/ui-react/styles.css';
+import '@aws-amplify/ui-react/styles.css';
 import './styles/qs-rls-tool.css';
-//import { GlobalStyle } from "./styles/GlobalStyle.ts";
 
 import {
   AppLayout,
@@ -15,7 +14,6 @@ import {
   TextContent,
   TopNavigation,
 } from '@cloudscape-design/components';
-import TODO from "./pages/todo.tsx";
 import Homepage from "./pages/Homepage.tsx";
 import GroupsListPage from "./pages/GroupsListPage.tsx";
 import ResetPage from "./pages/ResetPage.tsx";
@@ -24,7 +22,6 @@ import UsersListPage from "./pages/UsersListPage.tsx";
 import NamespacesListPage from "./pages/NamespacesListPage.tsx";
 import DataSetsListPage from "./pages/DataSetsListPage.tsx";
 //import GuidePage from "./pages/GuidePage.tsx";
-// import Testing from "./pages/Testing.tsx";
 
 import { HelpPanelProvider, useHelpPanel } from './contexts/HelpPanelContext.tsx';
 import { BreadCrumbProvider, useBreadCrumb } from './contexts/BreadCrumbContext.tsx';
@@ -64,9 +61,7 @@ function MainLayout() {
 
             {/*<Route path="/guide" element={<GuidePage />} />*/}
 
-            {/*<Route path="/test" element={<Testing />} />*/}
             <Route path="/reset" element={<ResetPage />} />
-            <Route path="/todo" element={<TODO />} />
           </Routes>
         </div>
       }
