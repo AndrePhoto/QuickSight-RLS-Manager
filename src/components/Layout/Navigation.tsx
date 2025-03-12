@@ -65,19 +65,9 @@ export const Navigation: React.FC = () => {
       items: [
         {
           type: "link",
-          text: "TODO List",
-          href: "/todo",
-        },
-        {
-          type: "link",
           text: "Reset Page",
           href: "/reset",
         },
-        /*{
-          type: "link",
-          text: "Test Page",
-          href: "/test",
-        },*/
       ]
     }
   ];
