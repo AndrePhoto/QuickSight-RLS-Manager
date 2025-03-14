@@ -1,4 +1,4 @@
-# QuickSight Row Level Security Manager
+# QuickSight Row Level Security Manager: Guide
 
 Many customers have highlighted the complexity of managing Row Level Security in QuickSight.
 When using Anonymous Embedding, Row Level Security is managed via tags and it's easier to do. Also, the UI in QuickSight it's friendly and easily undestandable.
@@ -34,9 +34,10 @@ See the details in [RLS Manager Resources](Amplify-Resources.md).
 
 ## Future Enhancements
 
-# Guide
+# User Guide
 
 * [Install the RLS Manager](/Guide/Install.md)
 * [RLS Manager Initialization](/Guide/Initialization.md)
-* Create Permissions
+* [Manage Permissions](/Guide/Manage-Permissions.md)
+* Logs (Amplify/Functions)
 * Code Dive Deep

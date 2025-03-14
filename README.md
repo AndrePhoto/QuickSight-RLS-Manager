@@ -1,7 +1,14 @@
 # QuickSight Row Level Security Manager
 
 QuickSight Managed Row Level Security Manager developed by *andrepgn@amazon.com*.
-Please refer to andrepgn for any hint, bug, or improvement idea.
+Please refer to **andrepgn** for any hint, bug, or improvement idea.
+
+* [The Idea](#the-idea)
+    * [How QuickSight resources are separated in AWS Regions](#how-quicksight-resources-are-separated-in-aws-regions)
+    * [What do you need to enable RLS](#what-do-you-need-to-enable-rls)
+* [Solution Architecture](#solution-architecture)
+* [Guide](#guide)
+    * [Quick Start](#quick-start)
 
 ## The Idea
 
@@ -55,7 +62,8 @@ So for each Region and RLS-DataSet you create, this solution will create for you
   - A Glue Table for each DataSet secured
 - A QuickSight Athena DataSource for each Region and a DataSet for each RLS-DataSet created.
 
-### Architecture
+
+## Solution Architecture
 
 Amplify will generate for you all the resources needed and will provide a UI to easily access, control and manage the Permissions.
 
@@ -69,4 +77,9 @@ Then the other resources will depend of the choices you made.
 
 ## Guide
 
-A step-by-step guide is available here: [read the Guide](/Guide/TheGuide.md).
+A step-by-step guide is available here: [read the Guide](/Guide/TheGuide.md)
+
+### Quick Start
+* [Deploy the QuickSight RLS Manager](/Guide/Install.md)
+* [Init the QuickSight RLS Manager](/Guide/Initialization.md)
+
