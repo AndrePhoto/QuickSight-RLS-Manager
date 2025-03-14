@@ -40,10 +40,12 @@ You can see all the resources creation process in [_CloudFormation_](https://doc
 
 Once the deploy has finished, you can see your the QuickSight-RLS-Manager app by clicking on _Visit deployed URL_.
 
-## Configure the Amplify App
+## Configure the Amplify App
+
 There are some other configuration you can do on Amplify once the app is deployed.
 
 ### Users Management
+
 _The self-sign-in is disabled._ 
 You can manage the users directly in _Amplify_, the users are managed through an [_AWS Cognito_](https://docs.aws.amazon.com/cognito/latest/developerguide/getting-started-user-pools.html) pool.
 
