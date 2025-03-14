@@ -1,4 +1,4 @@
-# Manage Permissions
+# Manage Permissions
 
 The whole point of this solution is to let you easily manage the Row Level Security in a visual and easier way. So the whole core is in the _Manage Permissions_ page.
 
