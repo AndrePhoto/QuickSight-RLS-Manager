@@ -1,4 +1,7 @@
 # Row Level Security Manager: Launch the solution with Amplify
+
+[Back to the Guide](/Guide/TheGuide.md)
+
 As said in the [README.md](../README.md), I have used Amplify to create this solution.
 
 * [Create the Amplify App](#create-the-amplify-app)

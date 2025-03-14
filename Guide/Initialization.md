@@ -8,7 +8,7 @@ When you first enter the **RLS Manager**, there is a first set-up to be done.
 ## Set up QuickSight Management Region
 First of all you need to define the *QuickSight Management Region*, which is the AWS Region where you first created you QuickSight Account, the Region where the whole QuickSight management is done.
 
-Once the Region has been selected, click on *Submit* and the **RLS Manager** launch `doAccountInit()` hook, that will: 
+Once the Region has been selected, click on *Submit* and the **RLS Manager** launch [`doAccountInit()`](/Guide/hooks/doAccountInit.md) hook, that will: 
 * Validate the access to the specified Region (be sure no SCP are blocking the APIs)
 * Do the account initialization on DynamoDB
 * Fetch the QuickSight NameSpaces
@@ -27,7 +27,7 @@ Once the Initialization has finished successfully, you should see the info relat
 Once the *QuickSight Management Region* has been defined, you can select which *AWS Regions* Row Level Security you want to manage with the **RLS Manager**.
 
 In the *Active QuickSight Regions* select *Add Regions* and add the ones you want to manage. 
-Note that, for each selected AWS Region, the **RLS Manager** will create (`regionSetup()`):
+Note that, for each selected AWS Region, the **RLS Manager** will create ([`regionSetup()`](/Guide/hooks/regionSetup.md)):
 * an *Amazon S3* bucket where the CSV created by the Manager will be stored (name will be: `qs-managed-rls-[UUID]`)
 * a *AWS Glue* Database, called `qs-managed-rls-[UUID]`, where the S3 data will be read and being available to be used in *Amazon Athena* and so in *Quicksight*
 * a *Amazon QuickSight* DataSource, named `qs-managed-rls-[UUID]`.
