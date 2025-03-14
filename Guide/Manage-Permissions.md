@@ -77,6 +77,6 @@ You can Edit (only the filter value) / Delete the permissions directly in-line i
 
 ![Manage Permissions](/Guide/images/ManagePermissions-06.png)
 
-### Download CSV Permissions File
+### Download CSV Permissions File
 If for some reason you want to download the CSV created for you, you have the possibility to enter the S3 bucket created for you in the specific Region or you can download the current permissions version directly in this page, opening the Export CSV container.
 ![Manage Permissions](/Guide/images/ManagePermissions-07.png)
