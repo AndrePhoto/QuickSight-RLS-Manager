@@ -31,6 +31,14 @@ Before you begin, ensure you have:
 
 ---
 
+> ⚠️ **IMPORTANT: Initialization Required**
+> 
+> After completing the installation, you **MUST** perform the [RLS Manager Initialization](Initialization.md) to configure your QuickSight regions and set up the necessary resources. The application will not function properly without initialization.
+> 
+> **Next Step After Installation**: [→ Go to Initialization Guide](Initialization.md)
+
+---
+
 ## Installation Steps
 
 1. 🍴 [**Fork the Repository**](#step-1-fork-the-repository)
@@ -219,14 +227,14 @@ The RLS Manager uses Amazon Cognito for authentication. Self-registration is dis
    - Click on your app name
    - Select the deployed branch (usually `main`)
 
-![Open Amplify](/Guide/images/Guide-Install-08.png)
+![Open Amplify](/Guide/images/Install/Guide-Install-11.png)
 
 2. **Access User Management**
    - Click **Backend environments** tab
    - Click **Authentication** or **User management**
    - This opens the Cognito User Pool
 
-![Open Amplify](/Guide/images/Guide-Install-09.png)
+![Open Amplify](/Guide/images/Install/Guide-Install-12.png)
 
 3. **Create Users**
    - Click **Create user**
@@ -245,8 +253,6 @@ The RLS Manager uses Amazon Cognito for authentication. Self-registration is dis
 #### User Management Best Practices
 
 - ✅ Use email addresses as usernames for clarity
-- ✅ Enable MFA for additional security
-- ✅ Create separate users for each administrator
 - ✅ Regularly review and remove inactive users
 - ❌ Don't share user credentials
 - ❌ Don't use generic accounts (e.g., admin@company.com)
@@ -268,7 +274,7 @@ Add an additional security layer by restricting access based on IP address or co
    - In Amplify console, click on your **App** (not branch)
    - Navigate to **Hosting > Firewall**
 
-![Open Amplify](/Guide/images/Guide-Install-10.png)
+![Open Amplify](/Guide/images/Install/Guide-Install-13.png)
 
 2. **Configure Rules**
    - **IP-based rules**: Allow/deny specific IP addresses or CIDR ranges
@@ -313,7 +319,7 @@ Use your own domain name instead of the default Amplify URL.
    - In Amplify console, click on your **App**
    - Navigate to **Hosting > Custom domains**
 
-![Open Amplify](/Guide/images/Guide-Install-11.png)
+![Open Amplify](/Guide/images/Install/Guide-Install-14.png)
 
 2. **Add Domain**
    - Click **Add domain**
@@ -342,20 +348,6 @@ Use your own domain name instead of the default Amplify URL.
    - Once verified, your custom domain is live
 
 ### Additional Configuration Options
-
-#### Environment Variables
-
-Add custom environment variables if needed:
-- Navigate to **App settings > Environment variables**
-- Add key-value pairs
-- Redeploy for changes to take effect
-
-#### Build Settings
-
-Customize build process if needed:
-- Navigate to **App settings > Build settings**
-- Modify `amplify.yml` configuration
-- Useful for custom build steps or dependencies
 
 #### Notifications
 
