@@ -6,14 +6,15 @@ This is the core functionality of the RLS Manager - creating, editing, and publi
 
 The Manage Permissions page allows you to:
 
-- 🔍 **Select** a region and DataSet to secure
-- ➕ **Create** permissions for users and groups
-- ✏️ **Edit** existing permissions
-- 🗑️ **Delete** unwanted permissions
-- 🚀 **Publish** changes to QuickSight
-- 📊 **Monitor** publishing progress
-- ⏮️ **Rollback** to previous versions
-- 📥 **Export** permissions as CSV
+- **Select** a region and DataSet to secure
+- **Create** permissions for users and groups
+- **Edit** existing permissions
+- **Copy** permissions from another DataSet (managed by RLS Manager)
+- **Delete** unwanted permissions
+- **Publish** changes to QuickSight
+- **Monitor** publishing progress
+- **Rollback** to previous versions
+- **Export** permissions as CSV
 
 ## Permission Management Workflow
 
@@ -57,9 +58,9 @@ Before managing permissions, ensure you've completed:
 
 **Un-Manageable DataSets** (🟠 MANUAL):
 - Created by uploading files directly to QuickSight
-- Cannot be managed via QuickSight API
+- Cannot be managed via RLS Manager
 - Permissions show 🟠 MANUAL status (always)
-- RLS Manager helps create permissions, but you must manually download CSV and upload to QuickSight
+- RLS Manager can help create permissions, but you must manually download CSV and upload to QuickSight
 - See [Working with MANUAL Permissions](#working-with-manual-permissions) for details
 
 ## Step 1: Select a Region
@@ -76,7 +77,7 @@ Choose the AWS region where your DataSet is located.
 - Ensure it was added during [Initialization](Initialization.md)
 - Or add it via **Global Settings** page
 
-![Manage Permissions](/Guide/images/ManagePermissions-01.png)
+![Manage Permissions](/Guide/images/ManagePermissions/ManagePermissions-01.png)
 
 ### Region Details Dashboard
 
@@ -170,7 +171,7 @@ Choose the DataSet you want to secure with Row-Level Security.
 
 **View all DataSets**: Navigate to **DataSets List** page for complete inventory
 
-![Manage Permissions](/Guide/images/ManagePermissions-02.png)
+![Manage Permissions](/Guide/images/ManagePermissions/ManagePermissions-02.png)
 
 ### DataSet Details
 
@@ -286,7 +287,7 @@ Create new permissions to control data access for users or groups.
 
 5. **Click "Create Permission"**
 
-![Manage Permissions](/Guide/images/ManagePermissions-03.png)
+![Manage Permissions](/Guide/images/ManagePermissions/ManagePermissions-03.png)
 
 #### Permission Examples
 
@@ -334,8 +335,8 @@ If you select a user/group that already has permissions:
 - Previous values are pre-filled
 - Changes overwrite the existing permission
 
-![Manage Permissions](/Guide/images/ManagePermissions-04.png)
-![Manage Permissions](/Guide/images/ManagePermissions-05.png)
+![Manage Permissions](/Guide/images/ManagePermissions/ManagePermissions-04.png)
+![Manage Permissions](/Guide/images/ManagePermissions/ManagePermissions-05.png)
 
 ---
 
@@ -425,7 +426,7 @@ Permissions can have four different statuses:
 - Permissions tracked in RLS Manager but applied manually
 - Status remains MANUAL even after you upload to QuickSight
 
-![Manage Permissions](/Guide/images/ManagePermissions-06.png)
+![Manage Permissions](/Guide/images/ManagePermissions/ManagePermissions-06.png)
 
 ---
 
@@ -712,7 +713,7 @@ Download the current permissions in CSV format.
 3. **Click "Download CSV"**
 4. **File downloads** - Format: `[DataSet]-RLS-v[Version].csv`
 
-![Manage Permissions](/Guide/images/ManagePermissions-07.png)
+![Manage Permissions](/Guide/images/ManagePermissions/ManagePermissions-07.png)
 
 #### CSV Format
 
