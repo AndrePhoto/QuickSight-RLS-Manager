@@ -300,6 +300,7 @@ function AddPermissionPage() {
   const [copyFromDataset, setCopyFromDataset] = useState<SelectedDataset | null>(null);
   const [copyFromPermissions, setCopyFromPermissions] = useState<any[]>([]);
   const [copyingPermissions, setCopyingPermissions] = useState<boolean>(false);
+  const [incompatiblePermissions, setIncompatiblePermissions] = useState<Set<number>>(new Set());
 
   /**
    * Add Log to output text area
@@ -673,12 +674,19 @@ function AddPermissionPage() {
     
     setCopyingPermissions(true);
     try {
-      addLog(`Copying ${copyFromPermissions.length} permission(s) from ${copyFromDataset.label} to ${selectedDataset.label}...`);
+      // Filter out incompatible permissions (those with fields not in destination dataset)
+      const compatiblePermissions = copyFromPermissions.filter((_, index) => !incompatiblePermissions.has(index));
+      const skippedCount = copyFromPermissions.length - compatiblePermissions.length;
+      
+      addLog(`Copying ${compatiblePermissions.length} permission(s) from ${copyFromDataset.label} to ${selectedDataset.label}...`);
+      if (skippedCount > 0) {
+        addLog(`⚠ Skipping ${skippedCount} incompatible permission(s) (fields not available in destination dataset)`, 'WARNING');
+      }
       
       // Determine status based on target dataset API manageability
       const permissionStatus = selectedDataset.apiManageable === false ? 'MANUAL' : 'PENDING';
       
-      for (const perm of copyFromPermissions) {
+      for (const perm of compatiblePermissions) {
         await client.models.Permission.create({
           dataSetArn: selectedDataset.dataSetArn,
           userGroupArn: perm.userGroupArn,
@@ -688,7 +696,7 @@ function AddPermissionPage() {
         });
       }
       
-      addLog(`✓ Successfully copied ${copyFromPermissions.length} permission(s)`);
+      addLog(`✓ Successfully copied ${compatiblePermissions.length} permission(s)`);
       
       // Refresh permissions list
       await fetchPermissions();
@@ -697,6 +705,7 @@ function AddPermissionPage() {
       setCopyPermissionsModalVisible(false);
       setCopyFromDataset(null);
       setCopyFromPermissions([]);
+      setIncompatiblePermissions(new Set());
       
     } catch (err) {
       console.error('Error copying permissions:', err);
@@ -3766,9 +3775,10 @@ function AddPermissionPage() {
             setCopyPermissionsModalVisible(false);
             setCopyFromDataset(null);
             setCopyFromPermissions([]);
+            setIncompatiblePermissions(new Set());
           }}
           header="Copy Permissions from Another Dataset"
-          size="large"
+          size="max"
           footer={
             <Box float="right">
               <SpaceBetween direction="horizontal" size="xs">
@@ -3778,6 +3788,7 @@ function AddPermissionPage() {
                     setCopyPermissionsModalVisible(false);
                     setCopyFromDataset(null);
                     setCopyFromPermissions([]);
+                    setIncompatiblePermissions(new Set());
                   }}
                 >
                   Cancel
@@ -3786,9 +3797,10 @@ function AddPermissionPage() {
                   variant="primary" 
                   onClick={copyPermissionsFromDataset}
                   loading={copyingPermissions}
-                  disabled={!copyFromDataset || copyFromPermissions.length === 0}
+                  disabled={!copyFromDataset || copyFromPermissions.length === 0 || (copyFromPermissions.length - incompatiblePermissions.size) === 0}
                 >
-                  Copy {copyFromPermissions.length} Permission(s)
+                  Copy {copyFromPermissions.length - incompatiblePermissions.size} Compatible Permission(s)
+                  {incompatiblePermissions.size > 0 && ` (${incompatiblePermissions.size} skipped)`}
                 </Button>
               </SpaceBetween>
             </Box>
@@ -3798,6 +3810,13 @@ function AddPermissionPage() {
             <Alert type="info">
               Select a dataset to copy permissions from. The permissions will be copied to <strong>{selectedDataset?.label}</strong> with status <Badge color={selectedDataset?.apiManageable === false ? "severity-medium" : "blue"}>{selectedDataset?.apiManageable === false ? "Manual" : "Pending"}</Badge>.
             </Alert>
+
+            {incompatiblePermissions.size > 0 && (
+              <Alert type="warning" header="Field Compatibility Warning">
+                <strong>{incompatiblePermissions.size}</strong> permission(s) reference fields that don't exist in the destination dataset <strong>{selectedDataset?.label}</strong>. 
+                These permissions are highlighted below and will be <strong>skipped</strong> during the copy operation. Only compatible permissions will be copied.
+              </Alert>
+            )}
 
             <FormField label="Select Dataset">
               <Select
@@ -3828,6 +3847,23 @@ function AddPermissionPage() {
                     // Fetch permissions from selected dataset
                     const perms = await fetchPermissionsFromDataset(selectedDetails.dataSetArn);
                     setCopyFromPermissions(perms);
+                    
+                    // Validate field compatibility
+                    if (selectedDataset?.fieldTypes) {
+                      const destinationFields = JSON.parse(selectedDataset.fieldTypes);
+                      const destinationFieldNames = Object.keys(destinationFields);
+                      const incompatible = new Set<number>();
+                      
+                      perms.forEach((perm, index) => {
+                        // Check if permission field exists in destination dataset
+                        // Skip "All" field as it's a special case
+                        if (perm.field !== "All" && !destinationFieldNames.includes(perm.field)) {
+                          incompatible.add(index);
+                        }
+                      });
+                      
+                      setIncompatiblePermissions(incompatible);
+                    }
                   }
                 }}
                 placeholder="Choose a dataset"
@@ -3843,8 +3879,21 @@ function AddPermissionPage() {
                   </Box>
                 ) : (
                   <Table
-                    items={copyFromPermissions}
+                    items={copyFromPermissions.map((perm, index) => ({ ...perm, _index: index }))}
                     columnDefinitions={[
+                      {
+                        id: "status",
+                        header: "Status",
+                        cell: item => {
+                          const isIncompatible = incompatiblePermissions.has(item._index);
+                          return isIncompatible ? (
+                            <Badge color="red">Incompatible</Badge>
+                          ) : (
+                            <Badge color="green">Compatible</Badge>
+                          );
+                        },
+                        width: 120
+                      },
                       {
                         id: "userGroup",
                         header: "User/Group",
@@ -3853,7 +3902,19 @@ function AddPermissionPage() {
                       {
                         id: "field",
                         header: "Field",
-                        cell: item => item.field
+                        cell: item => {
+                          const isIncompatible = incompatiblePermissions.has(item._index);
+                          return (
+                            <Box>
+                              {item.field}
+                              {isIncompatible && (
+                                <Box variant="small" color="text-status-error" margin={{ top: "xxxs" }}>
+                                  ⚠ Field not found in destination
+                                </Box>
+                              )}
+                            </Box>
+                          );
+                        }
                       },
                       {
                         id: "values",
