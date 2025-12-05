@@ -3856,8 +3856,8 @@ function AddPermissionPage() {
                       
                       perms.forEach((perm, index) => {
                         // Check if permission field exists in destination dataset
-                        // Skip "All" field as it's a special case
-                        if (perm.field !== "All" && !destinationFieldNames.includes(perm.field)) {
+                        // Skip "*" (All Fields) as it's always compatible
+                        if (perm.field !== "*" && !destinationFieldNames.includes(perm.field)) {
                           incompatible.add(index);
                         }
                       });

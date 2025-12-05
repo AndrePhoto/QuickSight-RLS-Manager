@@ -76,8 +76,8 @@ function MainLayout() {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
     {/*<GlobalStyle />*/}
-    {/*<Authenticator hideSignUp>*/}
-    <Authenticator>
+    <Authenticator hideSignUp>
+    {/*<Authenticator>*/}
       {({ signOut, user }) => (
         <Router>
           <div id="top-navigation-panel" role="navigation">
