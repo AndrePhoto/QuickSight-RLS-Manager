@@ -417,7 +417,10 @@ function DatasetListPage() {
             <Badge color="severity-neutral">DISABLED</Badge> The RLS is disabled for this dataset.
             </li>
             <li>
-            <Badge color="severity-low">Rules Dataset</Badge> This dataset is a Rules Dataset.
+            <Badge color="blue">Rules Dataset</Badge> This dataset is a Rules Dataset created by this tool.
+            </li>
+            <li>
+            <Badge color="severity-low">Rules Dataset</Badge> This dataset is a Rules Dataset not managed by this tool.
             </li>
           </ul>
         </TextContent>
@@ -431,10 +434,7 @@ function DatasetListPage() {
               <Badge color="red">No</Badge> This DataSet cannot be managed by this tool, since the APIs are not supported for the related ingestion mode (e.g. Direct File Upload).
             </li>
             <li>
-              <Badge color="severity-low">No</Badge> This is an RLS DataSet and is not directly manageable.
-            </li>
-            <li>
-              <Badge color="severity-neutral">N/A</Badge> This DataSet was created by the tool.
+              <Badge color="severity-neutral">No</Badge> This is an RLS DataSet and is not directly manageable.
             </li>
           </ul>
         </TextContent>
@@ -840,7 +840,11 @@ function DatasetListPage() {
                   sortingField: "rlsEnabled",
                   cell: (item: any) => (
                     <>
-                      {item.toolCreated ? <Badge color="severity-low">Rules DataSet</Badge> : 
+                      {item.isRls ? (
+                        <Badge color={item.toolCreated ? "blue" : "severity-low"}>
+                          Rules DataSet
+                        </Badge>
+                      ) : (
                         <>
                           <Badge color={item.rlsEnabled === "ENABLED" 
                             ? (item.rlsToolManaged === true 
@@ -858,7 +862,7 @@ function DatasetListPage() {
                             />
                           }
                         </>
-                      }
+                      )}
                     </>
                   ),
                 },
@@ -882,15 +886,8 @@ function DatasetListPage() {
                   cell: (item: any) => {
                     if (item.isRls) {
                       return (
-                        <Badge color="severity-low">
-                          No
-                        </Badge>
-                      );
-                    }
-                    if (item.toolCreated) {
-                      return (
                         <Badge color="severity-neutral">
-                          N/A
+                          No
                         </Badge>
                       );
                     }
