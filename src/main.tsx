@@ -22,7 +22,7 @@ import ManagePermissionsPage from "./pages/ManagePermissionsPage.tsx";
 import UsersListPage from "./pages/UsersListPage.tsx";
 import NamespacesListPage from "./pages/NamespacesListPage.tsx";
 import DataSetsListPage from "./pages/DataSetsListPage.tsx";
-//import GuidePage from "./pages/GuidePage.tsx";
+import GuidePage from "./pages/GuidePage.tsx";
 
 import { HelpPanelProvider, useHelpPanel } from './contexts/HelpPanelContext.tsx';
 import { BreadCrumbProvider, useBreadCrumb } from './contexts/BreadCrumbContext.tsx';
@@ -60,7 +60,7 @@ function MainLayout() {
 
             <Route path="/manage-permissions" element={<ManagePermissionsPage />} />
 
-            {/*<Route path="/guide" element={<GuidePage />} />*/}
+            <Route path="/guide" element={<GuidePage />} />
 
             <Route path="/reset" element={<ResetPage />} />
           </Routes>
