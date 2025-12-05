@@ -15,11 +15,6 @@ export const Navigation: React.FC = () => {
           text: "Global Settings",
           href: "/",
         },
-        /*{
-          type: "link",
-          text: "Guide",
-          href: "/guide",
-        },*/
       ]
     },
     {
@@ -36,6 +31,7 @@ export const Navigation: React.FC = () => {
     {
       type: "section",
       text: "Explore",
+      defaultExpanded: false,
       items: [
         {
         type: "link",
@@ -61,7 +57,20 @@ export const Navigation: React.FC = () => {
     },
     {
       type: "section",
+      text: "Documentation",
+      defaultExpanded: false,
+      items: [
+        {
+          type: "link",
+          text: "User Guide",
+          href: "/guide",
+        },
+      ]
+    },
+    {
+      type: "section",
       text: "DEV",
+      defaultExpanded: false,
       items: [
         {
           type: "link",
