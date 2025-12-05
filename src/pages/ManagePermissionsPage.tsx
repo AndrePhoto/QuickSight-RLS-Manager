@@ -2960,7 +2960,8 @@ function AddPermissionPage() {
                   (selectedUserGroup != null && selectedUserGroup.value === 'User' ? users : groups).map(item => (
                     {
                       label: item.name,
-                      value: item.userGroupArn
+                      value: item.userGroupArn,
+                      tags: selectedUserGroup?.value === 'User' && item.role ? [item.role] : undefined
                     }
                   ))
                 }
