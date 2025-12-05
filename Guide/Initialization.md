@@ -90,13 +90,6 @@ After configuring the Management Region, you can enable RLS management in specif
 - Regional resources (S3, Glue, DataSource) are created
 - Can be different from the Management Region
 
-### Why Multiple Regions?
-
-- **Data Locality** - Keep data in specific regions for compliance
-- **Performance** - Reduce latency by keeping data close to users
-- **Disaster Recovery** - Distribute resources across regions
-- **Cost Optimization** - Leverage regional pricing differences
-
 ### Adding a Region
 
 1. **Navigate to Active QuickSight Regions** section
@@ -108,19 +101,19 @@ After configuring the Management Region, you can enable RLS management in specif
 
 For each selected region, the RLS Manager automatically creates ([`regionSetup()`](/Guide/hooks/regionSetup.md)):
 
-#### 📁 Amazon S3 Bucket
+#### 📁 [Amazon S3 Bucket](/amplify/functions/createS3Bucket/README.md)
 - **Name**: `qs-managed-rls-[UUID]`
 - **Purpose**: Stores RLS CSV files
 - **Features**: Versioning enabled for rollback capability
 - **Location**: Same region as selected
 
-#### 🗃️ AWS Glue Database
+#### 🗃️ [AWS Glue Database](/amplify/functions/createGlueDatabase/README.md)
 - **Name**: `qs-managed-rls-[UUID]`
 - **Purpose**: Metadata catalog for RLS tables
 - **Integration**: Accessible via Amazon Athena
 - **Usage**: Enables QuickSight to query RLS data
 
-#### 📊 Amazon QuickSight DataSource
+#### 📊 [Amazon QuickSight DataSource](/amplify/functions/createQSDataSource/README.md)
 - **Name**: `qs-managed-rls-[UUID]`
 - **Type**: Athena DataSource
 - **Purpose**: Connects QuickSight to Glue tables
@@ -149,10 +142,8 @@ Once setup completes, you'll see comprehensive region information:
   - DataSets created via API
 - **Un-Manageable DataSets** - Cannot be managed via API
   - DataSets created by directly uploading files to QuickSight
-  - Legacy DataSets with unsupported configurations
 - **RLS Manager DataSets** - RLS DataSets created by this tool
   - Tagged with `RLS-Manager: True`
-  - Automatically managed and updated
 
 #### 🏗️ Regional Resources
 - **S3 Bucket Name** - Where CSV files are stored
@@ -165,9 +156,7 @@ Once setup completes, you'll see comprehensive region information:
 
 You can:
 - **Add regions** at any time
-- **Remove regions** (resources remain but are no longer managed)
-- **View all regions** in a single dashboard
-- **Manage permissions** across all regions centrally
+- **Remove regions**
 
 ### Troubleshooting
 
