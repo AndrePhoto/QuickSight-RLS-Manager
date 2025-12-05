@@ -204,31 +204,26 @@ This is the default configuration for most QuickSight accounts.
 1. **Access QuickSight Console**
    - Sign in with your QuickSight Admin account
    - Navigate to **Manage QuickSight** (top-right menu)
-
-2. **Open Security Settings**
+   - Under **Permissions** section, click on **AWS resources**
    - Click **Security & permissions** in the left menu
    - Click **Manage** button
 
-![Guide-Initialization.png](/Guide/images/Guide-InitializationQSPermissions-1.png)
+![Guide-Initialization.png](/Guide/images/Initialize/Guide-InitializationQSPermissions-1.png)
+
 
 3. **Configure S3 Access**
    - Click **Amazon S3**
    - Click **Select S3 Buckets**
 
-![Guide-Initialization.png](/Guide/images/Guide-InitializationQSPermissions-2.png)
+![Guide-Initialization.png](/Guide/images/Initialize/Guide-InitializationQSPermissions-2.png)
 
 4. **Select RLS Manager Buckets**
    - Find all buckets named `qs-managed-rls-[UUID]`
    - Check the box for each bucket
-   - You'll need one bucket per managed region
-   - Click **Select buckets** or **Finish**
+   - Remember: You'll have one bucket per managed region
+   - Click **Finish**, then click on **Save**
 
-![Guide-Initialization.png](/Guide/images/Guide-InitializationQSPermissions-3.png)
-
-5. **Verify Configuration**
-   - Ensure all RLS Manager buckets are listed
-   - Permissions are applied immediately
-   - No QuickSight restart required
+![Guide-Initialization.png](/Guide/images/Initialize/Guide-InitializationQSPermissions-3.png)
 
 #### What Gets Configured
 
@@ -335,10 +330,10 @@ Bucket names are displayed in the RLS Manager UI after region setup:
 
 After completing all three steps, verify:
 
-✅ **Management Region** - Configured and showing account info
-✅ **Managed Regions** - All desired regions added with resources created
-✅ **S3 Permissions** - QuickSight can access all RLS Manager buckets
-✅ **DataSets Visible** - Manageable DataSets appear in the UI
+- **Management Region** - Configured and showing account info
+- **Managed Regions** - All desired regions added with resources created
+- **S3 Permissions** - QuickSight can access all RLS Manager buckets
+- **DataSets Visible** - Manageable DataSets appear in the UI
 
 ### Test the Setup
 
