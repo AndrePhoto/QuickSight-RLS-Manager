@@ -4,6 +4,7 @@ import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Navigation} from "./components/Layout/Navigation.tsx";
+import QSRLSLogo from "./assets/QS-RLS-Logo.png";
 
 import '@aws-amplify/ui-react/styles.css';
 import './styles/qs-rls-tool.css';
@@ -86,7 +87,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                   href: "#",
                   title: "Row Level Security Manager",
                   logo: {
-                    src: "/src/assets/QS-RLS-Logo.png",
+                    src: QSRLSLogo,
                     alt: "QS-RLS"
                   }
                 }
